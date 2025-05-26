@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/skypulse_weatherapp.git/static/css/main.c53a8c38.css",
-    "main.js": "/skypulse_weatherapp.git/static/js/main.66dddd7a.js",
-    "index.html": "/skypulse_weatherapp.git/index.html",
-    "main.c53a8c38.css.map": "/skypulse_weatherapp.git/static/css/main.c53a8c38.css.map",
-    "main.66dddd7a.js.map": "/skypulse_weatherapp.git/static/js/main.66dddd7a.js.map"
+    "main.css": "/skypulse_weatherapp/static/css/main.c53a8c38.css",
+    "main.js": "/skypulse_weatherapp/static/js/main.66dddd7a.js",
+    "index.html": "/skypulse_weatherapp/index.html",
+    "main.c53a8c38.css.map": "/skypulse_weatherapp/static/css/main.c53a8c38.css.map",
+    "main.66dddd7a.js.map": "/skypulse_weatherapp/static/js/main.66dddd7a.js.map"
   },
   "entrypoints": [
     "static/css/main.c53a8c38.css",
