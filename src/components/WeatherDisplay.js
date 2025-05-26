@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const weatherIcons = {
   Clear: "https://cdn.jsdelivr.net/gh/erikflowers/weather-icons/svg/wi-day-sunny.svg",
@@ -22,18 +22,32 @@ export default function WeatherDisplay({ weather }) {
   const main = weather.weather[0].main;
   return (
     <div className="weather-card">
-      <img className="weather-icon"
-        src={weatherIcons[main] || weatherIcons['Clear']}
+      <img
+        className="weather-icon"
+        src={weatherIcons[main] || weatherIcons["Clear"]}
         alt={main}
       />
       <div className="temp">{Math.round(weather.main.temp)}°C</div>
       <div className="desc">{weather.weather[0].description}</div>
-      <div className="city">in {weather.name}, {weather.sys.country}</div>
-      <div className="details" style={{marginTop:"1rem", fontSize:"1rem", color:"#444"}}>
-        <div>Humidity: <b>{weather.main.humidity}%</b></div>
-        <div>Wind: <b>{weather.wind.speed} m/s</b></div>
-        <div>Feels Like: <b>{Math.round(weather.main.feels_like)}°C</b></div>
-        <div>Pressure: <b>{weather.main.pressure} hPa</b></div>
+      <div className="city">
+        in {weather.name}, {weather.sys.country}
+      </div>
+      <div
+        className="details"
+        style={{ marginTop: "1rem", fontSize: "1rem", color: "#444" }}
+      >
+        <div>
+          Humidity: <b>{weather.main.humidity}%</b>
+        </div>
+        <div>
+          Wind: <b>{weather.wind.speed} m/s</b>
+        </div>
+        <div>
+          Feels Like: <b>{Math.round(weather.main.feels_like)}°C</b>
+        </div>
+        <div>
+          Pressure: <b>{weather.main.pressure} hPa</b>
+        </div>
       </div>
     </div>
   );

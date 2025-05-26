@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import './App.css';
-import WeatherDisplay from './components/WeatherDisplay';
-import Forecast from './components/Forecast';
-import Particles from 'react-tsparticles';
-import { loadFull } from 'tsparticles';
+import React, { useState } from "react";
+import Particles from "react-tsparticles";
+import WeatherDisplay from "./components/WeatherDisplay";
+import Forecast from "./components/Forecast";
+import "./App.css";
 
 const weatherBg = {
   Clear: { color: "#fceabb", particles: "#ffe259" },
@@ -16,32 +15,30 @@ const weatherBg = {
 };
 
 function App() {
-  const [city, setCity] = useState('');
+  const [city, setCity] = useState("");
   const [weather, setWeather] = useState(null);
   const [forecast, setForecast] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [mainWeather, setMainWeather] = useState('Clear');
-
-  const particlesInit = async (main) => { await loadFull(main); };
+  const [error, setError] = useState("");
+  const [mainWeather, setMainWeather] = useState("Clear");
 
   const getWeather = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
     if (!city) {
-      setError('Please enter a city name!');
+      setError("Please enter a city name!");
       return;
     }
     setLoading(true);
     setWeather(null);
     setForecast([]);
     try {
-      const apiKey = '04b0065fc2c5fcf932a25fa0163c0144';
+      const apiKey = "04b0065fc2c5fcf932a25fa0163c0144"; // <-- Replace with your OpenWeatherMap API key!
       // Current weather
       const curRes = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
       );
-      if (!curRes.ok) throw new Error('City not found!');
+      if (!curRes.ok) throw new Error("City not found!");
       const curData = await curRes.json();
       setWeather(curData);
       setMainWeather(curData.weather[0].main);
@@ -50,60 +47,70 @@ function App() {
       const forecastRes = await fetch(
         `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`
       );
-      if (!forecastRes.ok) throw new Error('Forecast not found!');
+      if (!forecastRes.ok) throw new Error("Forecast not found!");
       const forecastData = await forecastRes.json();
-
       // Only get one forecast per day (midday)
-      const middayForecasts = forecastData.list.filter(f =>
+      const middayForecasts = forecastData.list.filter((f) =>
         f.dt_txt.includes("12:00:00")
       );
       setForecast(middayForecasts);
     } catch (err) {
-      setError(err.message || 'Something went wrong!');
+      setError(err.message || "Something went wrong!");
     }
     setLoading(false);
   };
 
-  const bg = weatherBg[mainWeather] || weatherBg['Clear'];
+  const bg = weatherBg[mainWeather] || weatherBg["Clear"];
 
   return (
-    <div className="app-container" style={{ background: bg.color }}>
+    <div className="main-bg">
       <Particles
-        id="tsparticles"
-        init={particlesInit}
         options={{
-          background: { color: { value: bg.color } },
+          background: { color: { value: "#e0eafc" } },
           fpsLimit: 60,
           particles: {
             color: { value: bg.particles },
-            links: { enable: true, color: bg.particles, distance: 150 },
-            move: { enable: true, speed: 1 },
-            number: { value: 40 },
-            opacity: { value: 0.3 },
-            shape: { type: 'circle' },
-            size: { value: { min: 2, max: 6 } }
-          }
+            move: { enable: true, speed: 0.5 },
+            number: { value: 30 },
+            opacity: { value: 0.15 },
+            shape: { type: "circle" },
+            size: { value: { min: 2, max: 5 } },
+          },
         }}
-        style={{ position: 'absolute', zIndex: 0 }}
+        style={{
+          position: "fixed",
+          width: "100vw",
+          height: "100vh",
+          zIndex: 1,
+        }}
       />
-      <h1 style={{ position: 'relative', zIndex: 2 }}>🌈 Weather Splash!</h1>
-      <form onSubmit={getWeather} style={{ position: 'relative', zIndex: 2 }}>
-        <input
-          type="text"
-          placeholder="Type city name..."
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-        />
-        <button type="submit">Check</button>
-      </form>
-      {loading && <div className="loader" style={{ position: 'relative', zIndex: 2 }}></div>}
-      {error && <div className="desc" style={{ color: "#e17055", position: 'relative', zIndex: 2 }}>{error}</div>}
-      {weather && (
-        <WeatherDisplay weather={weather} />
-      )}
-      {forecast.length > 0 && (
-        <Forecast forecast={forecast} />
-      )}
+      <div className="app-container">
+        <h1>
+          <span role="img" aria-label="rainbow">
+            🌈
+          </span>{" "}
+          <span className="weather-title">SKY PULSE!</span>
+        </h1>
+        <form onSubmit={getWeather} className="weather-form">
+          <input
+            type="text"
+            placeholder="Enter city..."
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+          />
+          <button type="submit">Check</button>
+        </form>
+        {loading && (
+          <div className="loader" style={{ position: "relative", zIndex: 2 }}></div>
+        )}
+        {error && (
+          <div className="desc" style={{ color: "#e17055", position: "relative", zIndex: 2 }}>
+            {error}
+          </div>
+        )}
+        {weather && <WeatherDisplay weather={weather} />}
+        {forecast.length > 0 && <Forecast forecast={forecast} />}
+      </div>
     </div>
   );
 }
