@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/skypulse_weatherapp/static/css/main.d2313581.css",
-    "main.js": "/skypulse_weatherapp/static/js/main.decf9f78.js",
+    "main.css": "/skypulse_weatherapp/static/css/main.e34bdf45.css",
+    "main.js": "/skypulse_weatherapp/static/js/main.d7fbe0ce.js",
     "index.html": "/skypulse_weatherapp/index.html",
-    "main.d2313581.css.map": "/skypulse_weatherapp/static/css/main.d2313581.css.map",
-    "main.decf9f78.js.map": "/skypulse_weatherapp/static/js/main.decf9f78.js.map"
+    "main.e34bdf45.css.map": "/skypulse_weatherapp/static/css/main.e34bdf45.css.map",
+    "main.d7fbe0ce.js.map": "/skypulse_weatherapp/static/js/main.d7fbe0ce.js.map"
   },
   "entrypoints": [
-    "static/css/main.d2313581.css",
-    "static/js/main.decf9f78.js"
+    "static/css/main.e34bdf45.css",
+    "static/js/main.d7fbe0ce.js"
   ]
 }
